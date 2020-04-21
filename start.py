@@ -1,17 +1,31 @@
 from random import randint
 
-guess = input(f">What is your guess? \n")
+guess = input(f"What is your guess? \n> ")
 
 def guessNumber(user_guess):
+    attempts = 4
+    start = True
     val = int(user_guess)
     random = randint(0, 10)
-    if (val != random):
-        print("Not correct")
-    else:
-        print("Correct")
+    if (val == random):   
+        print("Congratulations, you won!")
+    else:      
+        while start:  
+            val = int(input(f"Guess again? {attempts} attempt(s) left \n> "))          
+            if (val != random):
+                attempts -= 1            
+            else: 
+              print("Congratulations, you won!") 
+              break
+            if(attempts == 0):
+                print("Sorry you lost the game, try again")
+                break
+            
   
 def guessNow(range, tries, max_tries, start, random):
+    print(random)
     while start:            
+            print(random)
             try:                         
                 guess_input = int(input("Your guess \n> "))
                 print(f"{tries} out {max_tries} attempts")
@@ -43,29 +57,32 @@ except ValueError:
             tries = 1
             max_tries = 6
             random = randint(1, 10)
-            range = '1 - 10'
-            print(f"You get to guess a number between {range}, for {max_tries} tries")
+            random_range = '1 - 10'
+            print('This is the EASY level')
+            print(f"You get to guess a number between {random_range}, for {max_tries} tries")
             guessNow(random, tries, max_tries, start, random)
             
         elif(choice == 2):
-            print('This is the MEDIUM level')
-            print("You get to guess a number between 1 - 20, for 4 tries")
             start = True
             tries = 1
             max_tries = 4
             random = randint(1, 20)
-            range = '1 - 20'
-            guessNow(random, tries, max_tries, start, random)    
+            random_range = '1 - 20'
+            print('This is the MEDIUM level')
+            print(f"You get to guess a number between {random_range}, for {max_tries} tries")
+            guessNow(random, tries, max_tries, start, random)
+                
             
         elif(choice == 3):
-            print("Hard")
-            print('You get to guess a number between 1 - 50, for 3 tries')
             start = True
             tries = 1
             max_tries = 4
             random = randint(1, 50)
-            range = '1 - 50'
+            random_range = '1 - 50'
+            print('This is the HARD level')
+            print(f"You get to guess a number between {random_range}, for {max_tries} tries")
             guessNow(random, tries, max_tries, start, random)
+            
             
         elif(ValueError):
             print("Please pick a number")
